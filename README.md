@@ -1,6 +1,7 @@
 # @aquaron/time
 
 ![CodeQL](https://github.com/aquaron/time/workflows/CodeQL/badge.svg)
+![Tests](https://github.com/aquaron/time/workflows/Tests/badge.svg)
 
 Time utilities
 
