@@ -2,23 +2,14 @@
 
 Time utilities
 
-## Setup to test locally
-This is my first attempt in making, testing and publishing npm modules.
+## Usage
 
-### Make global link to local module
-```sh
-$ cd aquaron/time
-$ sudo npm link
-
-/usr/local/lib/node_modules/@aquaron/time -> /code/svelte/time
-```
-
-### Using the local module
-```sh
-$ mkdir ../test
-$ cd ../test
-$ npm link @aquaron/time
-$ echo "require('@aquaron/time').printMsg();" > test.js
-$ node test
-```
+Function | Return
+--- | ---
+`isUpcoming('2020-03-17')` | `false`
+`timeLeft(1000)` | Object containing `{... seconds: 1}`
+`nextDow(6)` | `Date` object of next Saturday
+`toDate('2020-03-17')` | `Date` object
+`toYMD(new Date())` | Today's date in `YYYY-MM-DD`
+`toPrettyDate('2020-03-17')` | `Tuesday, Mar 30, 2020, 12 AM`
 
