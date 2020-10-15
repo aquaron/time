@@ -2,6 +2,7 @@
 
 ![CodeQL](https://github.com/aquaron/time/workflows/CodeQL/badge.svg)
 ![Tests](https://github.com/aquaron/time/workflows/Tests/badge.svg)
+![Node.js Package](https://github.com/aquaron/time/workflows/Node.js%20Package/badge.svg)
 
 Time utilities
 
