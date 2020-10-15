@@ -1,6 +1,14 @@
 name: Tests
 
-on: push
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'lib/**'
+      - 'test/**'
+      - '.github/workflows/test.yml'
+      - 'package.json'
 
 jobs:
   test:
