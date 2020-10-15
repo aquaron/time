@@ -45,7 +45,7 @@ export function toDate (date: string, time = '00:00:00') {
 
 export function toYMD (date = new Date()) {
   return date.getFullYear() + '-' +
-     date.getMonth().padStart(2, '0') + '-' +
+     (date.getMonth() + 1).toString().padStart(2, '0') + '-' +
      date.getDate();
 }
 
