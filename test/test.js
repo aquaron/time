@@ -17,8 +17,11 @@ describe('toDate()', () => {
 });
 
 describe('toYMD()', () => {
-  const date = new Date(1989, 10, 27);
-  test(`Date ${date}`, () =>
-    expect(time.toYMD(date)).toEqual('1989-11-27')
-  );
+  const tests = [
+    { date: [1989,10,27], result: '1989-11-27' },
+    { date: [2009,8,3], result: '2009-09-03' }
+  ];
+  tests.forEach( t => test(`Date ${t.date}`, () =>
+    expect(time.toYMD(new Date(...t.date))).toEqual(t.result)
+  ));
 });

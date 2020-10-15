@@ -44,9 +44,9 @@ export function toDate (date: string, time = '00:00:00') {
 }
 
 export function toYMD (date = new Date()) {
-  return date.getFullYear() + '-' +
-     (date.getMonth() + 1).toString().padStart(2, '0') + '-' +
-     date.getDate();
+  const info = [ date.getFullYear(), date.getMonth() + 1, date.getDate() ]
+    .map( n => n.toString().padStart(2, '0') );
+  return info.join('-');
 }
 
 export function toPrettyDate(ymd: string, hms = '00:00:00') {
