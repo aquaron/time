@@ -44,7 +44,9 @@ export function toDate (date: string, time = '00:00:00') {
 }
 
 export function toYMD (date = new Date()) {
-  return date.toLocaleDateString('en-CA');
+  return date.getFullYear() + '-' +
+     date.getMonth().padStart(2, '0') + '-' +
+     date.getDate();
 }
 
 export function toPrettyDate(ymd: string, hms = '00:00:00') {
