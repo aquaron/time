@@ -25,3 +25,13 @@ describe('toYMD()', () => {
     expect(time.toYMD(new Date(...t.date))).toEqual(t.result)
   ));
 });
+
+describe('toPrettyDate()', () => {
+  const tests = [
+    { date: '2020-10-14', time: undefined, result: 'Wednesday, Oct 14, 2020, 12:00 AM' },
+    { date: '2020-10-12', time: '12:22:33', result: 'Monday, Oct 12, 2020, 12:22 PM' }
+  ];
+  tests.forEach( t => test(`Date ${t.date}`, () =>
+    expect(time.toPrettyDate(t.date, t.time)).toEqual(t.result)
+  ));
+});

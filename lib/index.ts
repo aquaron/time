@@ -29,6 +29,39 @@ export function timeLeft(delta = 0) {
   return { days, hours, minutes, seconds };
 }
 
+const timeTags = {
+  days: 'days',
+  hours: 'hours',
+  minutes: 'minutes',
+  seconds: 'seconds',
+  second: 'second'
+};
+
+export function timeLeftStr(delta = 0, tags = timeTags) {
+  const info = timeLeft(delta);
+
+  if (info.days > 1) {
+    return info.days + ' ' + tags.days;
+  }
+
+  info.hours += info.days * 24;
+  if (info.hours > 1) {
+    return info.hours + ' ' + tags.hours;
+  }
+
+  info.minutes += info.hours * 60;
+  if (info.minutes > 1) {
+    return info.minutes + ' ' + tags.minutes;
+  }
+
+  info.seconds += info.minutes * 60;
+  if (info.seconds > 1) {
+    return info.seconds + ' ' + tags.seconds;
+  }
+
+  return info.seconds + ' ' + (tags.second || tags.seconds);
+}
+
 export function nextDow(day: number = 0) {
   const time = new Date();
   const offset = (day - time.getDay()) * 86400000;
@@ -56,6 +89,7 @@ export function toPrettyDate(ymd: string, hms = '00:00:00') {
     month: 'short',
     day: '2-digit',
     hour: 'numeric',
+    minute: 'numeric',
     hour12: true
   });
 }
