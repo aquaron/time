@@ -1,6 +1,4 @@
-# @aquaron/time
-
-[![codeql]][scanning] [![tests]][issues] [![npm]][npmjs]
+# @aquaron/time [![codeql]][scanning] [![tests]][issues] [![npm]][npmjs]
 
 Collection of date/time related utilities.
 
