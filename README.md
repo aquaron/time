@@ -14,9 +14,9 @@ Function | Return
 `toYMD(new Date())` | Today's date in `YYYY-MM-DD`
 `toPrettyDate('2020-03-17')` | `Tuesday, Mar 30, 2020, 12:00 AM`
 
-[codeql]: https://github.com/aquaron/time/workflows/CodeQL/badge.svg
-[tests]: https://github.com/aquaron/time/workflows/Tests/badge.svg
-[npm]: https://github.com/aquaron/time/workflows/Node.js%20Package/badge.svg
+[codeql]: https://github.com/aquaron/time/workflows/codeql/badge.svg
+[tests]: https://github.com/aquaron/time/workflows/tests/badge.svg
+[npm]: https://github.com/aquaron/time/workflows/nodejs/badge.svg
 
 [scanning]: https://github.com/aquaron/time/security/code-scanning
 [issues]: https://github.com/aquaron/time/issues
