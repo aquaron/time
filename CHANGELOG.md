@@ -1,3 +1,8 @@
+#### 1.1.0 (2021-01-22)
+- `prevDow()` get previous day of week
+- Updated code to look more like TypeScript
+
+
 #### 1.0.4 (2020-11-04)
 - Use @aquaron/vdeploy for release management
 
