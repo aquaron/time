@@ -10,7 +10,7 @@ export function isUpcoming(date: string) {
   return ( new Date( ...toArray(date) ) ) > ( new Date() );
 }
 
-export function timeLeft(delta = 0) {
+export function timeLeft(delta: number = 0) {
   let seconds = Math.round(delta / 1000);
 
   const MIN = 60;
@@ -29,6 +29,14 @@ export function timeLeft(delta = 0) {
   return { days, hours, minutes, seconds };
 }
 
+export interface TimeTags {
+  days: string,
+  hours: string,
+  minutes: string,
+  seconds: string,
+  second: string
+}
+
 const timeTags = {
   days: 'days',
   hours: 'hours',
@@ -37,7 +45,7 @@ const timeTags = {
   second: 'second'
 };
 
-export function timeLeftStr(delta = 0, tags = timeTags) {
+export function timeLeftStr(delta: number = 0, tags: TimeTags = timeTags) {
   const info = timeLeft(delta);
 
   if (info.days > 1) {
@@ -68,6 +76,12 @@ export function nextDow(day: number = 0) {
   return new Date( time.getTime() + offset );
 }
 
+export function prevDow(day: number = 0) {
+  const time = new Date();
+  const offset = (time.getDay() + 7 - day) * 86400000;
+  return new Date( time.getTime() - offset );
+}
+
 export function toDate (date: string, time = '00:00:00') {
   const hms: number[] = time.split(':').map( n => +n );
   if (hms.length !== 3) throw new Error(`Time format HH:MM:SS (${time})`);
@@ -76,13 +90,13 @@ export function toDate (date: string, time = '00:00:00') {
   return new Date( ...toArray(date), ...hms );
 }
 
-export function toYMD (date = new Date()) {
+export function toYMD (date: Date = new Date()) {
   const info = [ date.getFullYear(), date.getMonth() + 1, date.getDate() ]
     .map( n => n.toString().padStart(2, '0') );
   return info.join('-');
 }
 
-export function toPrettyDate(ymd: string, hms = '00:00:00') {
+export function toPrettyDate(ymd: string, hms: string = '00:00:00') {
   return toDate(ymd, hms).toLocaleString('en-US', {
     weekday: 'long',
     year: 'numeric',
