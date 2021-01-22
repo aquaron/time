@@ -10,7 +10,7 @@ Function | Return
 `timeLeft(1000)` | Object containing `{... seconds: 1}`
 `timeLeftStr(1000)` | `1 second`
 `nextDow(6)` | `Date` object of next Saturday
-`nextDow(3)` | `Date` object of prev Wednesday
+`prevDow(3)` | `Date` object of prev Wednesday
 `toDate('2020-03-17')` | `Date` object
 `toYMD(new Date())` | Today's date in `YYYY-MM-DD`
 `toPrettyDate('2020-03-17')` | `Tuesday, Mar 30, 2020, 12:00 AM`
