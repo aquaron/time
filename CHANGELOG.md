@@ -1,3 +1,7 @@
+#### 1.1.1 (2021-03-18)
+- Fix next DOW calculation for negative values
+
+
 #### 1.1.0 (2021-01-22)
 - `prevDow()` get previous day of week
 - Updated code to look more like TypeScript
