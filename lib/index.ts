@@ -72,7 +72,7 @@ export function timeLeftStr(delta: number = 0, tags: TimeTags = timeTags) {
 
 export function nextDow(day: number = 0) {
   const time = new Date();
-  const offset = (day - time.getDay()) * 86400000;
+  const offset = ((day - time.getDay()) % 7 + 7) % 7 * 86400000;
   return new Date( time.getTime() + offset );
 }
 
