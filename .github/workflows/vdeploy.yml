@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
-      - uses: actions/setup-node@v2.2.0
+      - uses: actions/setup-node@v2.3.0
         with:
           node-version: 12
       - run: npm ci
@@ -27,7 +27,7 @@ jobs:
         run: echo ::set-output name=VER::$(echo $GITHUB_REF | cut -d / -f 3)
       - name: Update Version
         run: ./.github/scripts/incr-version.sh ${{ steps.new_version.outputs.VER }}
-      - uses: actions/setup-node@v2.2.0
+      - uses: actions/setup-node@v2.3.0
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
@@ -48,7 +48,7 @@ jobs:
         run: echo ::set-output name=VER::$(echo $GITHUB_REF | cut -d / -f 3)
       - name: Update Version
         run: ./.github/scripts/incr-version.sh ${{ steps.new_version.outputs.VER }}
-      - uses: actions/setup-node@v2.2.0
+      - uses: actions/setup-node@v2.3.0
         with:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
