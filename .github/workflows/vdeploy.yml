@@ -77,7 +77,7 @@ jobs:
           $(./.github/scripts/incr-version.sh ${{ steps.new_version.outputs.VER }})
 
       - name: Version PR
-        uses: peter-evans/create-pull-request@v3.10.1
+        uses: peter-evans/create-pull-request@v3.11.0
         with:
           commit-message: Update to ${{ steps.new_version.outputs.VER }}
           title: Update package.json (${{ steps.new_version.outputs.VER }})
