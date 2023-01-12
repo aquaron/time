@@ -12,7 +12,8 @@
     "test": "tsc && jest",
     "clean": "rm -rf dist",
     "prepublishOnly": "npm run compile",
-    "compile": "npm run clean && tsc -p ."
+    "compile": "npm run clean && tsc -p .",
+    "showPackFiles": "npm pack --dry-run --json | jq -r '.[].files[].path'"
   },
   "repository": {
     "type": "git",
@@ -31,5 +32,9 @@
   "devDependencies": {
     "jest": "^29.3.1",
     "typescript": "^4.9.4"
-  }
+  },
+  "files": [
+    "dist",
+    "!**/*.tsbuildinfo"
+  ]
 }

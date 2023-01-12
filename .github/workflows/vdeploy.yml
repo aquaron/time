@@ -20,7 +20,14 @@ jobs:
       - name: Cacing Results
         uses: actions/upload-artifact@v3
         with:
-          path: ${{ github.workspace }}
+          path: |
+            LICENSE
+            README.md
+            dist
+            package-lock.json
+            package.json
+            README.md
+            !dist/**/*.tsbuildinfo
           retention-days: 1
 
   publish-npm:
@@ -28,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download Artifacts
-        uses: actions/download-artifacts@v3
+        uses: actions/download-artifact@v3
 
       - name: Publising to NPM
         uses: JS-DevTools/npm-publish@v1
@@ -42,7 +49,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download Artifacts
-        uses: actions/download-artifacts@v3
+        uses: actions/download-artifact@v3
 
       - name: Publishing to GPR
         uses: JS-DevTools/npm-publish@v1
