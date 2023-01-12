@@ -27,9 +27,9 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - run: ./.github/scripts/incr-version.sh ${{ env.TAG_VERSION }}
 
       - name: Publishing to NPM
+        run: ./.github/scripts/incr-version.sh ${{ env.TAG_VERSION }}
         uses: JS-DevTools/npm-publish@v1
         with:
           registry: https://registry.npmjs.org/
@@ -43,9 +43,9 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - run: ./.github/scripts/incr-version.sh ${{ env.TAG_VERSION }}
 
       - name: Publishing to GPR
+        run: ./.github/scripts/incr-version.sh ${{ env.TAG_VERSION }}
         uses: JS-DevTools/npm-publish@v1
         with:
           registry: https://registry.npmjs.org/
@@ -62,7 +62,7 @@ jobs:
 
       - name: Increment Version
         run: |
-          echo "newVer=$TAG_VERSION" >> $GITHUB_ENV
+          echo "newVer=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_ENV
           echo "bodyText=$(./.github/scripts/incr-version.sh ${{ env.newVer }})" >> $GITHUB_ENV
 
       - name: Version PR
