@@ -4,9 +4,6 @@ on:
   release:
     types: [published]
 
-env:
-  TAG_VERSION: "$(echo $GITHUB_REF | cut -d / -f 3)"
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -28,7 +25,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Increment Version
-        run: ./.github/scripts/incr-version.sh ${{ env.TAG_VERSION }}
+        run: ./.github/scripts/incr-version.sh ${{ github.ref_name }}
       - name: Publishing to NPM
         uses: JS-DevTools/npm-publish@v1
         with:
@@ -44,7 +41,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Increment Version
-        run: ./.github/scripts/incr-version.sh ${{ env.TAG_VERSION }}
+        run: ./.github/scripts/incr-version.sh ${{ github.ref_name }}
       - name: Publishing to GPR
         uses: JS-DevTools/npm-publish@v1
         with:
@@ -61,16 +58,14 @@ jobs:
           fetch-depth: 0
 
       - name: Increment Version
-        run: |
-          echo 'ref-name ${{ github.ref_name }}'
-          echo "newVer=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_ENV
-          echo "bodyText=$(./.github/scripts/incr-version.sh ${{ github.ref_name }})" >> $GITHUB_ENV
+        run: echo "bodyText=$(./.github/scripts/incr-version.sh ${{ github.ref_name }})" \
+             >> $GITHUB_ENV
 
       - name: Version PR
         uses: peter-evans/create-pull-request@v4
         with:
-          commit-message: Update to ${{ env.newVer }}
-          title: Update package.json (${{ env.newVer }})
+          commit-message: Update to ${{ github.ref_name }}
+          title: Update package.json (${{ github.ref_name }})
           body: ${{ env.bodyText }}
           branch: update-version
           base: master
