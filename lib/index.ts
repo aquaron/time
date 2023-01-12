@@ -97,7 +97,7 @@ export function toYMD (date: Date = new Date()) {
 }
 
 export function toPrettyDate(ymd: string, hms: string = '00:00:00') {
-  return toDate(ymd, hms).toLocaleString('en-US', {
+  return new Intl.DateTimeFormat('en-US', {
     weekday: 'long',
     year: 'numeric',
     month: 'short',
@@ -105,5 +105,5 @@ export function toPrettyDate(ymd: string, hms: string = '00:00:00') {
     hour: 'numeric',
     minute: 'numeric',
     hour12: true
-  });
+  }).format(toDate(ymd, hms));
 }
