@@ -16,11 +16,8 @@ jobs:
           npm ci
           npm test
           ./.github/scripts/incr-version.sh "$(echo $GITHUB_REF | cut -d / -f 3)"
-
       - name: Cacing Results
         uses: actions/upload-artifact@v3
-        with:
-          retention-days: 1
 
   publish-npm:
     needs: build
