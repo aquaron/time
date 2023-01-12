@@ -4,6 +4,9 @@ on:
   release:
     types: [published]
 
+env:
+  TAG_VERSION: "$(echo $GITHUB_REF | cut -d / -f 3)"
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -12,40 +15,22 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: latest
-      - name: Update Version
+      - name: Run Tests ($TAG_VERSION)
         run: |
-          echo "tagVersion=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_ENV
           npm ci
           npm test
-          ./.github/scripts/incr-version.sh ${{ env.tagVersion }}
-
-      - name: Cacing Results
-        uses: actions/upload-artifact@v3
-        with:
-          name: package
-          path: |
-            LICENSE
-            README.md
-            dist
-            package-lock.json
-            package.json
-            README.md
-            !dist/**/*.tsbuildinfo
-          retention-days: 1
 
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Download Artifacts
-        uses: actions/download-artifact@v3
+      - uses: actions/checkout@v3
         with:
-          name: package
+          fetch-depth: 0
+      - name: Upgrade to $TAG_VERSION
+      - run: ./.github/scripts/incr-version.sh $TAG_VERSION
 
-      - name: Show content
-        run: ls -R
-
-      - name: Publising to NPM
+      - name: Publishing to NPM
         uses: JS-DevTools/npm-publish@v1
         with:
           registry: https://registry.npmjs.org/
@@ -57,6 +42,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Upgrade to $TAG_VERSION
+      - run: ./.github/scripts/incr-version.sh $TAG_VERSION
 
       - name: Publishing to GPR
         uses: JS-DevTools/npm-publish@v1
@@ -75,14 +64,13 @@ jobs:
 
       - name: Increment Version
         run: |
-          echo "newVer=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_ENV
-          echo "bodyText=$(./.github/scripts/incr-version.sh ${{ env.newVer }})" >> $GITHUB_ENV
+          echo "bodyText=$(./.github/scripts/incr-version.sh $TAG_VERSION)" >> $GITHUB_ENV
 
       - name: Version PR
         uses: peter-evans/create-pull-request@v4
         with:
-          commit-message: Update to ${{ env.newVer }}
-          title: Update package.json (${{ env.newVer }})
+          commit-message: Update to $TAG_VERSION
+          title: Update package.json ($TAG_VERSION)
           body: ${{ env.bodyText }}
           branch: update-version
           base: master
