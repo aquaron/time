@@ -62,8 +62,7 @@ jobs:
       - name: Increment Version
         run: |
           echo "newVer=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_ENV
-        run: echo "bodyText=$(./.github/scripts/incr-version.sh ${{ env.newVer }})" \
-             >> $GITHUB_ENV
+          echo "bodyText=$(./.github/scripts/incr-version.sh ${{ env.newVer }})" >> $GITHUB_ENV
 
       - name: Version PR
         uses: peter-evans/create-pull-request@v4
