@@ -27,8 +27,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Upgrade to ${{ env.TAG_VERSION }}
-        run: ./.github/scripts/incr-version.sh ${{ env.TAG_VERSION }}
+      - run: ./.github/scripts/incr-version.sh ${{ env.TAG_VERSION }}
 
       - name: Publishing to NPM
         uses: JS-DevTools/npm-publish@v1
@@ -44,8 +43,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Upgrade to ${{ env.TAG_VERSION }}
-        run: ./.github/scripts/incr-version.sh ${{ env.TAG_VERSION }}
+      - run: ./.github/scripts/incr-version.sh ${{ env.TAG_VERSION }}
 
       - name: Publishing to GPR
         uses: JS-DevTools/npm-publish@v1
@@ -64,13 +62,14 @@ jobs:
 
       - name: Increment Version
         run: |
-          echo "bodyText=$(./.github/scripts/incr-version.sh $TAG_VERSION)" >> $GITHUB_ENV
+          echo "newVer=$TAG_VERSION" >> $GITHUB_ENV
+          echo "bodyText=$(./.github/scripts/incr-version.sh ${{ env.newVer }})" >> $GITHUB_ENV
 
       - name: Version PR
         uses: peter-evans/create-pull-request@v4
         with:
-          commit-message: Update to ${{ env.TAG_VERSION }}
-          title: Update package.json (${{ env.TAG_VERSION }})
+          commit-message: Update to ${{ env.newVer }}
+          title: Update package.json (${{ env.newVer }})
           body: ${{ env.bodyText }}
           branch: update-version
           base: master
