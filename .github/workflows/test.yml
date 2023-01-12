@@ -15,6 +15,9 @@ jobs:
     runs-on: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: latest
       - name: Install Dependencies, Build & Test
         run: |
           npm ci

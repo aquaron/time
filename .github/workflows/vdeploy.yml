@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        run: |
+      - run: |
           npm ci
           npm test
           ./.github/scripts/incr-version.sh "$(echo $GITHUB_REF | cut -d / -f 3)"
@@ -44,8 +44,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name:
-          run: echo ${{ steps.new_version.outputs.VER }}
+      - run: echo ${{ steps.new_version.outputs.VER }}
 
       - name: Get Tag Version
         id: new_version
