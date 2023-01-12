@@ -28,7 +28,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Upgrade to $TAG_VERSION
-      - run: ./.github/scripts/incr-version.sh $TAG_VERSION
+        run: ./.github/scripts/incr-version.sh $TAG_VERSION
 
       - name: Publishing to NPM
         uses: JS-DevTools/npm-publish@v1
@@ -45,7 +45,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Upgrade to $TAG_VERSION
-      - run: ./.github/scripts/incr-version.sh $TAG_VERSION
+        run: ./.github/scripts/incr-version.sh $TAG_VERSION
 
       - name: Publishing to GPR
         uses: JS-DevTools/npm-publish@v1
