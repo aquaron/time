@@ -12,14 +12,17 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: latest
-      - run: |
+      - name: Update Version
+        run: |
           echo "tagVersion=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_ENV
           npm ci
           npm test
           ./.github/scripts/incr-version.sh ${{ env.tagVersion }}
+
       - name: Cacing Results
         uses: actions/upload-artifact@v3
         with:
+          name: package
           path: |
             LICENSE
             README.md
@@ -36,6 +39,11 @@ jobs:
     steps:
       - name: Download Artifacts
         uses: actions/download-artifact@v3
+        with:
+          name: package
+
+      - name: Show content
+        run: ls -R
 
       - name: Publising to NPM
         uses: JS-DevTools/npm-publish@v1
@@ -48,8 +56,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Download Artifacts
-        uses: actions/download-artifact@v3
+      - uses: actions/checkout@v3
 
       - name: Publishing to GPR
         uses: JS-DevTools/npm-publish@v1
