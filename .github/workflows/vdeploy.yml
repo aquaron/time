@@ -15,7 +15,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: latest
-      - name: Run Tests ($TAG_VERSION)
+      - name: Run Tests (${{ env.TAG_VERSION }})
         run: |
           npm ci
           npm test
@@ -27,14 +27,14 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Upgrade to $TAG_VERSION
-        run: ./.github/scripts/incr-version.sh $TAG_VERSION
+      - name: Upgrade to ${{ env.TAG_VERSION }}
+        run: ./.github/scripts/incr-version.sh ${{ env.TAG_VERSION }}
 
       - name: Publishing to NPM
         uses: JS-DevTools/npm-publish@v1
         with:
           registry: https://registry.npmjs.org/
-          token: ${{secrets.NPM_TOKEN}}
+          token: ${{ secrets.NPM_TOKEN }}
           dry-run: true
 
   publish-gpr:
@@ -44,14 +44,14 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Upgrade to $TAG_VERSION
-        run: ./.github/scripts/incr-version.sh $TAG_VERSION
+      - name: Upgrade to ${{ env.TAG_VERSION }}
+        run: ./.github/scripts/incr-version.sh ${{ env.TAG_VERSION }}
 
       - name: Publishing to GPR
         uses: JS-DevTools/npm-publish@v1
         with:
           registry: https://registry.npmjs.org/
-          token: ${{secrets.GITHUB_TOKEN}}
+          token: ${{ secrets.GITHUB_TOKEN }}
           dry-run: true
 
   vdeploy:
@@ -69,8 +69,8 @@ jobs:
       - name: Version PR
         uses: peter-evans/create-pull-request@v4
         with:
-          commit-message: Update to $TAG_VERSION
-          title: Update package.json ($TAG_VERSION)
+          commit-message: Update to ${{ env.TAG_VERSION }}
+          title: Update package.json (${{ env.TAG_VERSION }})
           body: ${{ env.bodyText }}
           branch: update-version
           base: master
