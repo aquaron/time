@@ -31,7 +31,7 @@ jobs:
         with:
           registry: https://registry.npmjs.org/
           token: ${{ secrets.NPM_TOKEN }}
-          dry-run: true
+          dry-run: false
 
   publish-gpr:
     needs: build
@@ -47,7 +47,7 @@ jobs:
         with:
           registry: https://registry.npmjs.org/
           token: ${{ secrets.GITHUB_TOKEN }}
-          dry-run: true
+          dry-run: false
 
   vdeploy:
     runs-on: ubuntu-latest
