@@ -1,13 +1,3 @@
-#### 1.2.0 (2023-01-11)
-
-- release(v1.2.0): Removed uneeded files from package. Update GH Action flow
-- chore(deploy): List files explicitly. New `showPackFiles`
-- test: Use latest Node to test
-- refactor: Switch `toLocaleString` to `Intl.DateTimeFormat`
-- test(deploy): Upgraded deployment YAML (dry-run)
-- test(fix): Spacing changed in date output
-- Update to v1.1.1 (#20)
-
 #### 1.1.1 (2021-03-18)
 - Fix next DOW calculation for negative values
 

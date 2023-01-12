@@ -31,7 +31,7 @@ jobs:
         with:
           registry: https://registry.npmjs.org/
           token: ${{ secrets.NPM_TOKEN }}
-          dry-run: false
+          dry-run: true
 
   publish-gpr:
     needs: build
@@ -45,7 +45,7 @@ jobs:
       - name: Publishing to GPR
         uses: JS-DevTools/npm-publish@v1
         with:
-          registry: https://registry.npmjs.org/
+          registry: https://npm.pkg.github.com/
           token: ${{ secrets.GITHUB_TOKEN }}
           dry-run: false
 
